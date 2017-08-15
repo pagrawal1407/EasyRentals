@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.csci567.easyrentals.CarDetails">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textSize="12sp"
+            android:id="@+id/enterAddress"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp" />
+
+        <EditText
+            android:id="@+id/acceptAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterAddress"
+            android:hint="@string/enterAddress"
+            android:inputType="textMultiLine"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/acceptAddress"
+            android:id="@+id/linearlayout"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enterCity"
+                android:layout_weight="1"
+                android:id="@+id/acceptCity"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enterState"
+                android:layout_weight="1"
+                android:id="@+id/acceptState"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zipcode"
+            android:textSize="12sp"
+            android:id="@+id/zipcode"
+            android:layout_below="@+id/linearlayout"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <EditText
+            android:id="@+id/acceptZipCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/zipcode"
+            android:hint="@string/enterZipCode"
+            android:inputType="number"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <View android:background="#a8a8a6"
+            android:layout_width = "match_parent"
+            android:layout_height="0.75dp"
+            android:layout_below="@+id/acceptZipCode"
+            android:id="@+id/separatorLine"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carType"
+            android:id="@+id/carTypeText"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/separatorLine"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/year"
+            android:textSize="12sp"
+            android:id="@+id/yearText"
+            android:layout_below="@+id/carTypeText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/yearText"
+            android:hint="@string/enterYear"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/acceptYear"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/make"
+            android:textSize="12sp"
+            android:id="@+id/makeText"
+            android:layout_below="@+id/acceptYear"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/make"
+            android:layout_below="@+id/makeText"
+            android:id="@+id/acceptMake"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/model"
+            android:textSize="12sp"
+            android:id="@+id/modelText"
+            android:layout_below="@+id/acceptMake"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/model"
+            android:layout_below="@+id/modelText"
+            android:id="@+id/acceptModel"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transmission"
+            android:textSize="12sp"
+            android:id="@+id/transmissionText"
+            android:layout_below="@+id/acceptModel"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/transmissionText"
+            android:hint="@string/transmission"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/acceptTransmission"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/odometer"
+            android:textSize="12sp"
+            android:id="@+id/odometerText"
+            android:layout_below="@+id/acceptTransmission"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/odometer"
+            android:layout_below="@+id/odometerText"
+            android:id="@+id/acceptOdometer"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trim"
+            android:textSize="12sp"
+            android:id="@+id/trimText"
+            android:layout_below="@+id/acceptOdometer"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/trim"
+            android:layout_below="@+id/trimText"
+            android:id="@+id/acceptTrim"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/style"
+            android:textSize="12sp"
+            android:id="@+id/styleText"
+            android:layout_below="@+id/acceptTrim"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/styleText"
+            android:hint="@string/style"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/acceptStyle"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <View android:background="#a8a8a6"
+            android:layout_width = "match_parent"
+            android:layout_height="0.75dp"
+            android:layout_below="@+id/acceptStyle"
+            android:id="@+id/separatorLine1"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/features"
+            android:id="@+id/FeatureText"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:layout_below="@+id/separatorLine1"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <CheckBox
+            android:id="@+id/GPSCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gps"
+            android:layout_below="@+id/FeatureText"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <CheckBox
+            android:id="@+id/HybridCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hybrid"
+            android:layout_below="@+id/FeatureText"
+            android:layout_toEndOf="@+id/GPSCheckBox"
+            android:layout_toRightOf="@+id/GPSCheckBox"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <CheckBox
+            android:id="@+id/PetfriendlyCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pet_friendly"
+            android:layout_below="@+id/FeatureText"
+            android:layout_toEndOf="@+id/HybridCheckBox"
+            android:layout_toRightOf="@+id/HybridCheckBox"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <CheckBox
+            android:id="@+id/BluetoothCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bluetooth"
+            android:layout_below="@+id/GPSCheckBox"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <CheckBox
+            android:id="@+id/AudioCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/audioPlayer"
+            android:layout_toEndOf="@+id/BluetoothCheckBox"
+            android:layout_toRightOf="@id/BluetoothCheckBox"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/GPSCheckBox"
+            android:layout_marginTop="15dp"/>
+
+        <CheckBox
+            android:id="@+id/sunroofCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sunroof"
+            android:layout_below="@+id/GPSCheckBox"
+            android:layout_toEndOf="@+id/AudioCheckBox"
+            android:layout_toRightOf="@+id/AudioCheckBox"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sunroofCheckBox"
+            android:layout_marginTop="35dp"
+            android:text="@string/next"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="#8b36bc"
+            android:id="@+id/nextButton"
+            android:onClick="onNextPressed" />
+
+    </RelativeLayout>
+
+
+</ScrollView>

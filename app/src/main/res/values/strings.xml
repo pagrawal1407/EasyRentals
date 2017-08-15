@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">EasyRentals</string>
+    <string name="listCar">List your car</string>
+    <string name="searchText">Enter your location</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="carType">Which car do you own?</string>
+    <string name="year">Year</string>
+    <string name="enterYear">Enter year</string>
+    <string name="make">Make</string>
+    <string name="model">Model</string>
+    <string name="transmission">Transmission</string>
+    <string name="odometer">Odometer</string>
+    <string name="trim">Trim (optional)</string>
+    <string name="style">Style</string>
+    <string name="features">Select the features in your car</string>
+    <string name="gps">GPS</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="pet_friendly">Pet Friendly</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="audioPlayer">Audio Player</string>
+    <string name="sunroof">SunRoof</string>
+    <string name="zipcode">ZipCode</string>
+    <string name="address">Address</string>
+    <string name="enterAddress">Enter your address here</string>
+    <string name="enterCity">Enter city here</string>
+    <string name="enterState">Enter state here</string>
+    <string name="enterZipCode">Enter Zip code</string>
+    <string name="next">Next</string>
+    <string name="exteriorPictures">Put 4 exterior pictures here</string>
+    <string name="uploadImage">Upload Image</string>
+    <string name="exterior1">Exterior Image 1</string>
+    <string name="exterior2">Exterior Image 2</string>
+    <string name="exterior3">Exterior Image 3</string>
+    <string name="exterior4">Exterior Image 4</string>
+    <string name="interiorPictures">Enter 2 Internal pictures here</string>
+    <string name="interior1">Interior Image 1</string>
+    <string name="interior2">Interior Image 2</string>
+
+
+    <string-array name="transmissionArray">
+        <item> Manual </item>
+        <item> Automatic </item>
+    </string-array>
+
+    <string-array name="styleArray">
+        <item> Hatchback </item>
+        <item> Compact Sedan </item>
+        <item> Full Size Sedan </item>
+        <item> Minivan </item>
+        <item> Truck </item>
+    </string-array>
+</resources>

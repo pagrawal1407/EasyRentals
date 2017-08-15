@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.csci567.easyrentals.ExteriorImageUpload">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/exteriorPictures"
+            android:textSize="25sp"
+            android:id="@+id/carImageText"/>
+
+
+        <TextView
+            android:id="@+id/exteriorText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exterior1"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:layout_below="@id/carImageText"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/image_display1"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/exteriorText1"
+            android:layout_alignParentRight="true"
+            tools:ignore="ContentDescription"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uploadImage"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:background="#000"
+            android:id="@+id/upload_button1"
+            android:layout_below="@+id/image_display1"/>
+
+        <TextView
+            android:id="@+id/exteriorText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exterior2"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:layout_below="@id/upload_button1"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/image_display2"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/exteriorText2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            tools:ignore="ContentDescription"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uploadImage"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:background="#8b36bc"
+            android:id="@+id/upload_button2"
+            android:layout_below="@+id/image_display2"/>
+
+        <TextView
+            android:id="@+id/exteriorText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exterior3"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:layout_below="@id/upload_button2"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/image_display3"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/exteriorText3"
+            android:layout_alignParentRight="true"
+            tools:ignore="ContentDescription"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uploadImage"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:background="#8b36bc"
+            android:id="@+id/upload_button3"
+            android:layout_below="@+id/image_display3"/>
+
+        <TextView
+            android:id="@+id/exteriorText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exterior4"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:layout_below="@id/upload_button3"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/image_display4"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/exteriorText4"
+            android:layout_alignParentRight="true"
+            tools:ignore="ContentDescription"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uploadImage"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:background="#8b36bc"
+            android:id="@+id/upload_button4"
+            android:layout_below="@+id/image_display4"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:id="@+id/next_button"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="#8b36bc"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/upload_button4"
+            android:onClick="onNextPressed"/>
+
+    </RelativeLayout>
+</ScrollView>
