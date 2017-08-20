@@ -40,6 +40,19 @@
     <string name="detailsText">Tell us about you</string>
     <string name="drivingLicenseState">Enter Driving license State</string>
     <string name="drivingLicenseInfo">Driving License Information</string>
+    <string name="verifyNumberHeading">Verify your phone number</string>
+    <string name="enterPhoneNumber">Enter your phone number</string>
+    <string name="enterCode">Enter the received code here</string>
+    <string name="enterCodeHere">Enter code here</string>
+    <string name="getVerificationCode">Get verification Code</string>
+    <string name="verifyCode">verify Code</string>
+    <string name="advancedNoticeTitle">You are just one step away from earning extra money</string>
+    <string name="advanceNotice">Advance notice</string>
+    <string name="advancedNoticeAdvice">Block trips that don\'t give you enough advance notice.</string>
+    <string name="shortestTripHeading">How long would you like trips to last?</string>
+    <string name="shortestPossibleTrip">Shortest possible trip</string>
+    <string name="longestPossibleTrip">Longest Possible trip</string>
+    <string name="enterLongestTrip">Enter the value of longest possible trip</string>
 
 
     <string-array name="transmissionArray">
@@ -62,4 +75,24 @@
         <item> Khyber Pakhtunkhwa </item>
         <item> Islamabad Capital Territory  </item>
     </string-array>
+
+    <string-array name="advNoticeArray">
+        <item> 12 Hours </item>
+        <item> 1 Day </item>
+        <item> 2 Days </item>
+        <item> 3 Days </item>
+        <item> 7 Days </item>
+    </string-array>
+
+    <string-array name="shortestTripArray">
+        <item> 1 Day </item>
+        <item> 2 Days </item>
+    </string-array>
+
+
+    <string-array name="longestDistanceArray">
+        <item> Set Limit </item>
+        <item> No Limit </item>
+    </string-array>
+
 </resources>
