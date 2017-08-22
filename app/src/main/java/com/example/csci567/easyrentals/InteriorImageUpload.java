@@ -48,7 +48,7 @@ public class InteriorImageUpload extends AppCompatActivity {
     }
 
     public void onNextPressed(View view) {
-        Intent intent = new Intent(this, InteriorImageUpload.class);
+        Intent intent = new Intent(this, AdvancedNotice.class);
         startActivity(intent);
     }
 

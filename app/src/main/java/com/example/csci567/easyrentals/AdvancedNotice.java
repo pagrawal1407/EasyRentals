@@ -1,5 +1,6 @@
 package com.example.csci567.easyrentals;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,11 +54,14 @@ public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnI
     public void onNextPressed(View view) {
 
         String limit;
-        if (longestTrip.equals("Set Limit")){
+        if (longestTrip.equals("Set Limit")) {
             limit = setLimit.getText().toString();
         }
         else limit = longestTrip;
         Toast.makeText(this, limit, Toast.LENGTH_SHORT).show();
+
+        Intent nextIntent = new Intent(this, InsuranceDetails.class);
+        startActivity(nextIntent);
     }
 
     @Override

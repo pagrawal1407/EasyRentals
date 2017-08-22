@@ -28,6 +28,10 @@
         <activity android:name=".ExteriorImageUpload" />
         <activity android:name=".phoneNumberVerification" />
         <activity android:name=".AdvancedNotice" />
+        <activity android:name=".InsuranceDetails" />
+        <activity android:name=".signin" />
+        <activity android:name=".signup" />
+        <activity android:name=".SignUpChoiceScreen"></activity>
     </application>
 
 </manifest>
