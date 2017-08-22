@@ -41,6 +41,14 @@
     <string name="detailsText">Tell us about you</string>
     <string name="drivingLicenseState">Enter Driving license State</string>
     <string name="drivingLicenseInfo">Driving License Information</string>
+    <string name="longestPossibleTrip">Longest Possible trip</string>
+    <string name="finalStepTitle">Final step to publish</string>
+    <string name="registrationImage">Registration Image</string>
+    <string name="maxValue20000">20000</string>
+    <string name="minValue0">0</string>
+    <string name="expectedRentAmount">Expected amount for rent</string>
+    <string name="selectedPrice">Estimated price you selected is:</string>
+    <string name="email">email</string>
 
 
     <string-array name="transmissionArray">
@@ -63,4 +71,24 @@
         <item> Khyber Pakhtunkhwa </item>
         <item> Islamabad Capital Territory  </item>
     </string-array>
+
+    <string-array name="advNoticeArray">
+        <item> 12 Hours </item>
+        <item> 1 Day </item>
+        <item> 2 Days </item>
+        <item> 3 Days </item>
+        <item> 7 Days </item>
+    </string-array>
+
+    <string-array name="shortestTripArray">
+        <item> 1 Day </item>
+        <item> 2 Days </item>
+    </string-array>
+
+
+    <string-array name="longestDistanceArray">
+        <item> Set Limit </item>
+        <item> No Limit </item>
+    </string-array>
+
 </resources>

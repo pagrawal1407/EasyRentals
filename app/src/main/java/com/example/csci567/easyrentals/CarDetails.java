@@ -175,6 +175,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
                 break;
             case R.id.acceptLicenseState:
                 licenseStateText = adapterView.getSelectedItem().toString();
+                break;
         }
     }
 

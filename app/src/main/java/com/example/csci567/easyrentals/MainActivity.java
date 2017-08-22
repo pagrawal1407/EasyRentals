@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void listCar(View view){
-        Intent listCarIntent = new Intent(this, CarDetails.class);
-        startActivity(listCarIntent);
+        Intent verifyPhone = new Intent(this, phoneNumberVerification.class);
+        startActivity(verifyPhone);
     }
 }
