@@ -90,6 +90,15 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         drivingLicenseNumber = (EditText) findViewById(R.id.acceptLicenseNumber);
     }
 
+    private Boolean ifNull(String... args){
+        Boolean result = false;
+        for (String arg : args) {
+            if (arg.equals("")) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
     public void onNextPressed(View view) {
 

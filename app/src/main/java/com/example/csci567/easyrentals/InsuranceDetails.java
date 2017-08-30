@@ -115,7 +115,7 @@ public class InsuranceDetails extends AppCompatActivity implements SeekBar.OnSee
     }
 
     public void onNextPressed(View view) {
-        Intent intent = new Intent(this, AdvancedNotice.class);
+        Intent intent = new Intent(this, SignUpChoiceScreen.class);
         startActivity(intent);
     }
 }

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,6 +47,8 @@ public class phoneNumberVerification extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (verificationCode.getText().toString().equals(code)) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
                     Intent listCar = new Intent(getApplicationContext(), CarDetails.class);
                     startActivity(listCar);
                 }
@@ -94,6 +97,8 @@ public class phoneNumberVerification extends AppCompatActivity {
                 SmsManager sms = SmsManager.getDefault();
                 sms.sendTextMessage(telephoneNumber, null, message[0], null, null);
 
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
                 verificationCode.setVisibility(View.VISIBLE);
                 number.setVisibility(View.VISIBLE);
                 verifyCode.setVisibility(View.VISIBLE);
