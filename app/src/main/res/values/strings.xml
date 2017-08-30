@@ -67,6 +67,15 @@
     <string name="signup">Sign Up</string>
     <string name="fname">First Name</string>
     <string name="lname">Last Name</string>
+    <string name="signInOptionTitle">Please sign in to complete the process</string>
+    <string name="selectDate">Click here to select date</string>
+    <string name="fromAndTo">Select from and to dates</string>
+    <string name="book">Book Now</string>
+    <string name="Date">Date</string>
+    <string name="time">Time</string>
+    <string name="selectTime">Click here to select time</string>
+    <string name="withDriver">With Driver</string>
+    <string name="withoutDriver">Without Driver</string>
 
 
     <string-array name="transmissionArray">

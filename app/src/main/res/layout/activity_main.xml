@@ -1,98 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fillViewport="true"
     android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp"
     tools:context="com.example.csci567.easyrentals.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="250dp"
-        android:id="@+id/mainImage"
-        android:src="@drawable/family_car_rental"
-        tools:ignore="ContentDescription"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/mainImage"
+            android:src="@drawable/family_car_rental"
+            tools:ignore="ContentDescription"
+            />
 
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="@string/listCar"
-        android:id="@+id/listCarTopButton"
-        android:onClick="listCar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintHorizontal_bias="0.95"/>
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/listCar"
+            android:id="@+id/listCarTopButton"
+            android:onClick="listCar"
+            android:layout_alignParentRight="true"/>
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="30sp"
+            android:textColor="#FFF"
+            android:id="@+id/appTitle"
+            android:layout_marginTop="200dp"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/searchText"
+            android:layout_below="@+id/mainImage"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/ic_action_search"
+            android:drawableStart="@drawable/ic_action_search"
+            android:id="@+id/searchBar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Date"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:id="@+id/dateTitleText"
+            android:layout_below="@+id/searchBar"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateText"
+            android:text="@string/selectDate"
+            android:textSize="20sp"
+            android:layout_below="@+id/searchBar"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:id="@+id/timeTitleText"
+            android:layout_below="@+id/dateTitleText"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeText"
+            android:textSize="20sp"
+            android:text="@string/selectTime"
+            android:layout_below="@+id/dateTitleText"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:id="@+id/checkboxLayout"
+            android:layout_below="@+id/timeTitleText">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/withDriver"
+                android:id="@+id/withDriver"
+                android:layout_below="@+id/timeTitleText"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/withoutDriver"
+                android:id="@+id/withoutDriver"
+                android:layout_below="@+id/timeTitleText"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/book"
+            android:textColor="#fff"
+            android:id="@+id/listCarBottomButton"
+            android:onClick="listCar"
+            android:background="#000"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/checkboxLayout"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="30sp"
-        android:textColor="#DDDFFF"
-        android:id="@+id/appTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/searchText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57"
-        android:drawableLeft="@drawable/ic_action_search"
-        android:drawableStart="@drawable/ic_action_search"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/from"
-        android:textSize="20sp"
-        android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        app:layout_constraintHorizontal_bias="0.05"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/to"
-        android:textSize="20sp"
-        android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85"
-        app:layout_constraintHorizontal_bias="0.05"/>
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="@string/listCar"
-        android:id="@+id/listCarBottomButton"
-        android:onClick="listCar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
-        app:layout_constraintHorizontal_bias="0.95"/>
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>

@@ -6,17 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 
     private Spinner advanceNotice, shortestTrip, longestDist;
+    private CheckBox withDriverCheckBox, withoutDriverCheckBox;
     private EditText setLimit;
     private String advNotice;
     private String shortTrip;
-    private String longestTrip;
+    private String longestTrip, withDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,9 @@ public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnI
 
         intializeSpinners();
         setLimit = (EditText) findViewById(R.id.setlimit);
+        withoutDriverCheckBox = (CheckBox) findViewById(R.id.withoutDriver);
+        withDriverCheckBox = (CheckBox) findViewById(R.id.withDriver);
+
         ArrayAdapter<CharSequence> adapteradvNotice = ArrayAdapter.createFromResource(this, R.array.advNoticeArray, R.layout.spinner_layout);
         adapteradvNotice.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -43,6 +49,10 @@ public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnI
         advanceNotice.setOnItemSelectedListener(this);
         shortestTrip.setOnItemSelectedListener(this);
         longestDist.setOnItemSelectedListener(this);
+
+        withDriverCheckBox.setOnCheckedChangeListener(this);
+        withoutDriverCheckBox.setOnCheckedChangeListener(this);
+
     }
 
     private void intializeSpinners() {
@@ -54,20 +64,23 @@ public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnI
     public void onNextPressed(View view) {
 
         String limit;
+
         if (longestTrip.equals("Set Limit")) {
             limit = setLimit.getText().toString();
-        }
-        else limit = longestTrip;
+        } else limit = longestTrip;
         Toast.makeText(this, limit, Toast.LENGTH_SHORT).show();
-
-        Intent nextIntent = new Intent(this, InsuranceDetails.class);
-        startActivity(nextIntent);
+        if (limit.equals("")) {
+            Toast.makeText(this, "Please enter a value in set limit field", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent nextIntent = new Intent(this, InsuranceDetails.class);
+            startActivity(nextIntent);
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        switch (adapterView.getId()){
+        switch (adapterView.getId()) {
             case R.id.acceptAdvanceNotice:
                 advNotice = adapterView.getSelectedItem().toString();
                 break;
@@ -76,10 +89,9 @@ public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnI
                 break;
             case R.id.acceptLongestTrip:
                 longestTrip = adapterView.getSelectedItem().toString();
-                if (longestTrip.equals("Set Limit")){
+                if (longestTrip.equals("Set Limit")) {
                     setLimit.setVisibility(View.VISIBLE);
-                }
-                else if (longestTrip.equals("No Limit")){
+                } else if (longestTrip.equals("No Limit")) {
                     setLimit.setVisibility(View.GONE);
                 }
                 break;
@@ -89,5 +101,17 @@ public class AdvancedNotice extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (withoutDriverCheckBox.isChecked()){
+            withDriver = "true";
+            withDriverCheckBox.setChecked(false);
+        }
+        if (withDriverCheckBox.isChecked()){
+            withDriver = "false";
+            withoutDriverCheckBox.setChecked(false);
+        }
     }
 }
