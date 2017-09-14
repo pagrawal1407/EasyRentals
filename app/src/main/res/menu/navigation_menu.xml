@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_acc"
+        android:title="My Account"
+        android:icon="@mipmap/ic_account_circle_black_24dp"/>
+
+    <item android:id="@+id/nav_log_out"
+        android:title="Log Out"
+        android:icon="@mipmap/ic_logout_variant"
+        android:onClick="end"/>
+</menu>

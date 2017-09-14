@@ -57,6 +57,8 @@
     <string name="selectTime">Click here to select time</string>
     <string name="withDriver">With Driver</string>
     <string name="withoutDriver">Without Driver</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 
     <string-array name="transmissionArray">
