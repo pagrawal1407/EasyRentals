@@ -104,7 +104,7 @@ public class signup extends AppCompatActivity {
 
     private void volleyCall(String fnameInput, String lnameInput, String emailInput, String passwdInput) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String URL = "http://45.79.76.22:9080/EasyRentals/EasyRentals/registerUser";
+        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/EasyRentals/registerUser";
 
         Map<String,String> jsonparams = new HashMap<String, String>();
 
@@ -127,9 +127,9 @@ public class signup extends AppCompatActivity {
                         }
                         if (msg != null) {
                             if (msg.equals("Thanks for Signup") ){
-                                /*Intent intent = new Intent(getBaseContext(), WelcomePage.class);
+                                Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
                                 Toast.makeText(signup.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
-                                startActivity(intent);*/
+                                startActivity(intent);
                             }
                             else
                                 Toast.makeText(signup.this,"Incorrect Username or Password", Toast.LENGTH_LONG).show();

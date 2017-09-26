@@ -57,6 +57,11 @@
     <string name="selectTime">Click here to select time</string>
     <string name="withDriver">With Driver</string>
     <string name="withoutDriver">Without Driver</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="driverTitle">Please select with or without driver option</string>
+    <string name="distanceTitle">Please select the maximum distance allowed</string>
+    <string name="enterAmount">Enter suitable rent amount</string>
 
 
     <string-array name="transmissionArray">

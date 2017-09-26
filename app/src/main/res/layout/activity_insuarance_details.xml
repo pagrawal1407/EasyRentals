@@ -119,64 +119,6 @@
             android:layout_below="@+id/image_display3"
             android:onClick="uploadOptions"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/expectedRentAmount"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:textAlignment="center"
-            android:id="@+id/seekBarTitle"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/upload_button3"/>
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/seekBarTitle"
-            android:id="@+id/priceSeekBar"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/minValue0"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:id="@+id/seekBarMinValue"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginStart="35dp"
-            android:layout_below="@+id/priceSeekBar"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/maxValue20000"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:id="@+id/seekBarMaxValue"
-            android:layout_marginTop="5dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/priceSeekBar"
-            android:layout_marginRight="25dp"
-            android:layout_marginEnd="25dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/seekBarMinValue"
-            android:textSize="14sp"
-            android:textColor="#000"
-            android:id="@+id/seekBarValue"
-            android:text="@string/selectedPrice"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"/>
-
 
         <Button
             android:layout_width="match_parent"
@@ -188,7 +130,7 @@
             android:background="#000"
             android:layout_marginBottom="10dp"
             android:id="@+id/nextButton1"
-            android:layout_below="@id/seekBarValue"
+            android:layout_below="@id/upload_button3"
             android:onClick="onNextPressed"/>
 
 

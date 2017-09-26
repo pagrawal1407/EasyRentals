@@ -3,6 +3,7 @@ package com.example.csci567.easyrentals;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import utility.AppPreferences;
+
 public class phoneNumberVerification extends AppCompatActivity {
 
     private EditText phoneNumber, verificationCode;
@@ -26,12 +29,14 @@ public class phoneNumberVerification extends AppCompatActivity {
     private Button sendCode, verifyCode;
     private ProgressDialog progressDialog;
     private int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE= 999;
+    private AppPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_verification);
 
+        appPreferences = new AppPreferences(getApplicationContext());
         phoneNumber = (EditText) findViewById(R.id.getNumber);
         verificationCode = (EditText) findViewById(R.id.getCode);
         number = (TextView) findViewById(R.id.displayCode);
@@ -93,6 +98,8 @@ public class phoneNumberVerification extends AppCompatActivity {
                 message[0] = "Use this verification code: ";
                 code[0] = String.valueOf(random.nextInt((max - min) + 1) + min);
                 message[0] = message[0] + code[0];
+
+                appPreferences.savePhoneNumber(telephoneNumber);
 
                 SmsManager sms = SmsManager.getDefault();
                 sms.sendTextMessage(telephoneNumber, null, message[0], null, null);
