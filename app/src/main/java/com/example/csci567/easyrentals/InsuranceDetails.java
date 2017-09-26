@@ -1,38 +1,46 @@
 package com.example.csci567.easyrentals;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 
-public class InsuranceDetails extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+import id.zelory.compressor.Compressor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import utility.AppPreferences;
+
+
+public class InsuranceDetails extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 1;
     private static final int PICK_IMAGE_2 = 2;
     private static final int PICK_IMAGE_3 = 3;
     private String [] selectedPath = new String[3];
-    private int seekBarValue;
-    private TextView seekBarValueDisplay;
+   // private int seekBarValue;
+  //  private TextView seekBarValueDisplay;
+    private AppPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insuarance_details);
 
-        SeekBar seekBar = (SeekBar) findViewById(R.id.priceSeekBar);
-        seekBar.setMax(20000);
-        seekBar.setOnSeekBarChangeListener(this);
-
-        seekBarValueDisplay = (TextView) findViewById(R.id.seekBarValue);
+        appPreferences = new AppPreferences(getApplicationContext());
     }
 
     public void uploadOptions(View view) {
@@ -98,24 +106,84 @@ public class InsuranceDetails extends AppCompatActivity implements SeekBar.OnSee
         return ImageFilePath.getPath(this, selectedImage);
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        seekBarValue = i;
-        seekBarValueDisplay.setText(String.format("%s%s", getString(R.string.selectedPrice), String.valueOf(seekBarValue)));
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
-    }
 
     public void onNextPressed(View view) {
+
+        int counter = 0;
+        for (final String selectedImageIterator:selectedPath) {
+            uploadImage(selectedImageIterator, counter);
+            counter++;
+        }
         Intent intent = new Intent(this, SignUpChoiceScreen.class);
         startActivity(intent);
+    }
+
+    private void uploadImage(final String imageName, final int counter){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                File f = new File(imageName);
+                Bitmap compressedImageFile = null;
+                try {
+                    compressedImageFile = new Compressor(InsuranceDetails.this).compressToBitmap(f);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String content_type = getMimeType(imageName);
+
+                //Bitmap bmp = BitmapFactory.decodeFile(selectedPath);
+                int height = 0;
+                int width = 0;
+                if (compressedImageFile != null) {
+                    height = compressedImageFile.getHeight();
+                    width = compressedImageFile.getWidth();
+                }
+                Bitmap resized = compressedImageFile;
+                if (width > 4096) {
+                    resized  = Bitmap.createScaledBitmap(compressedImageFile, 4050, height, true);
+                }
+                if (height > 4096){
+                    int newWidth = resized.getWidth();
+                    resized  = Bitmap.createScaledBitmap(compressedImageFile, newWidth, 4050, true);
+                }
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                if (resized != null) {
+                    resized.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                }
+
+
+                OkHttpClient client = new OkHttpClient();
+                RequestBody fileBody = RequestBody.create(MediaType.parse(content_type), bos.toByteArray());
+
+                RequestBody requestBody = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("fileName", appPreferences.getPhoneNumber() + "Info" + counter)
+                        .addFormDataPart("file", imageName.substring(imageName.lastIndexOf('/') + 1), fileBody)
+                        .build();
+
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url("http://45.79.76.22/EasyRentals/EasyRentals/image/upload")
+                        .post(requestBody)
+                        .build();
+
+
+                try {
+                    okhttp3.Response response = client.newCall(request).execute();
+
+                    if (!response.isSuccessful()) {
+                        throw new IOException("Error:" + response);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        t.start();
+    }
+
+    private String getMimeType(String path) {
+        String extension = MimeTypeMap.getFileExtensionFromUrl(path);
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 }

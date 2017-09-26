@@ -3,6 +3,7 @@ package com.example.csci567.easyrentals;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -10,10 +11,22 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+
+import id.zelory.compressor.Compressor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import utility.AppPreferences;
 
 public class InteriorImageUpload extends AppCompatActivity {
 
@@ -21,6 +34,7 @@ public class InteriorImageUpload extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
     private static final int PICK_IMAGE_2 = 2;
     private String [] selectedPath = new String[2];
+    private AppPreferences appPreferences;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -45,11 +59,88 @@ public class InteriorImageUpload extends AppCompatActivity {
             // app-defined int constant that should be quite unique
 
         }
+
+        appPreferences = new AppPreferences(getApplicationContext());
     }
 
     public void onNextPressed(View view) {
-        Intent intent = new Intent(this, AdvancedNotice.class);
+
+        int counter = 0;
+        for (final String selectedImageIterator:selectedPath) {
+            uploadImage(selectedImageIterator, counter);
+            counter++;
+        }
+        Intent intent = new Intent(this, InsuranceDetails.class);
         startActivity(intent);
+    }
+
+    private void uploadImage(final String imageName, final int counter){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                File f = new File(imageName);
+                Bitmap compressedImageFile = null;
+                try {
+                    compressedImageFile = new Compressor(InteriorImageUpload.this).compressToBitmap(f);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String content_type = getMimeType(imageName);
+
+                //Bitmap bmp = BitmapFactory.decodeFile(selectedPath);
+                int height = 0;
+                int width = 0;
+                if (compressedImageFile != null) {
+                    height = compressedImageFile.getHeight();
+                    width = compressedImageFile.getWidth();
+                }
+                Bitmap resized = compressedImageFile;
+                if (width > 4096) {
+                    resized  = Bitmap.createScaledBitmap(compressedImageFile, 4050, height, true);
+                }
+                if (height > 4096){
+                    int newWidth = resized.getWidth();
+                    resized  = Bitmap.createScaledBitmap(compressedImageFile, newWidth, 4050, true);
+                }
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                if (resized != null) {
+                    resized.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                }
+
+
+                OkHttpClient client = new OkHttpClient();
+                RequestBody fileBody = RequestBody.create(MediaType.parse(content_type), bos.toByteArray());
+
+                RequestBody requestBody = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("fileName", appPreferences.getDrivingLicense() + "Interior" + counter)
+                        .addFormDataPart("file", imageName.substring(imageName.lastIndexOf('/') + 1), fileBody)
+                        .build();
+
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url("http://45.79.76.22/EasyRentals/EasyRentals/image/upload")
+                        .post(requestBody)
+                        .build();
+
+
+                try {
+                    okhttp3.Response response = client.newCall(request).execute();
+
+                    if (!response.isSuccessful()) {
+                        throw new IOException("Error:" + response);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        t.start();
+    }
+
+    private String getMimeType(String path) {
+        String extension = MimeTypeMap.getFileExtensionFromUrl(path);
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
     public void uploadOptions(View view) {

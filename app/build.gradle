@@ -33,5 +33,6 @@ dependencies {
     compile 'com.borax12.materialdaterangepicker:library:1.9'
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'id.zelory:compressor:2.1.0'
     testCompile 'junit:junit:4.12'
 }

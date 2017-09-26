@@ -89,16 +89,16 @@ public class ListViewAdapter extends BaseAdapter {
             holder.year.setText(year);
         }
 
-        if (data.zipcode != 0) {
-            String zipcode = Integer.toString(data.zipcode);
+        if (data.address.zipcode != 0) {
+            String zipcode = Double.toString(data.address.zipcode);
             holder.zipcode.setText(zipcode);
         }
 
-        if (data.latitude != 0 && data.longitude != 0) {
+        if (data.address.geoLocation.getLatitude() != 0 && data.address.geoLocation.getLongitude() != 0) {
             Geocoder gc = new Geocoder(mcontext);
             List<Address> addList = null;
             try {
-                addList = gc.getFromLocation(data.latitude, data.longitude, 1);
+                addList = gc.getFromLocation(data.address.geoLocation.getLatitude(), data.address.geoLocation.getLongitude(), 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -114,7 +114,7 @@ public class ListViewAdapter extends BaseAdapter {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 // RequestBody fileBody = RequestBody.create(MediaType.parse(content_type),bos.toByteArray());
-                String URL = "http://45.79.76.22:9080/EasyRentals/image/download" + "?fileName="+data.licensePlateNumber;
+                String URL = "http://45.79.76.22:9080/EasyRentals/image/download" + "?fileName="+data.drivingLicenseNumber;
 
                 okhttp3.Request request = new okhttp3.Request.Builder()
                         .url(URL)

@@ -247,30 +247,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/trim"
-            android:textSize="12sp"
-            android:id="@+id/trimText"
-            android:layout_below="@+id/acceptOdometer"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/trim"
-            android:layout_below="@+id/trimText"
-            android:id="@+id/acceptTrim"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/style"
             android:textSize="12sp"
             android:id="@+id/styleText"
-            android:layout_below="@+id/acceptTrim"
+            android:layout_below="@+id/acceptOdometer"
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"/>
@@ -374,10 +354,152 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"/>
 
+        <View android:background="#a8a8a6"
+            android:layout_width = "match_parent"
+            android:layout_height="0.75dp"
+            android:layout_below="@+id/sunroofCheckBox"
+            android:id="@+id/separatorLine2"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/driverTitle"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:id="@+id/driverTitle"
+            android:layout_below="@+id/separatorLine2"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/withDriver"
+            android:id="@+id/withDriver"
+            android:layout_below="@+id/driverTitle"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/withoutDriver"
+            android:id="@+id/withoutDriver"
+            android:layout_toRightOf="@+id/withDriver"
+            android:layout_toEndOf="@+id/withDriver"
+            android:layout_below="@+id/driverTitle"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <View android:background="#a8a8a6"
+            android:layout_width = "match_parent"
+            android:layout_height="0.75dp"
+            android:layout_below="@+id/withDriver"
+            android:id="@+id/separatorLine3"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/distanceTitle"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:id="@+id/distanceTitle"
+            android:layout_below="@+id/separatorLine3"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/longestPossibleTrip"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:id="@+id/longestTripText"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/distanceTitle"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/acceptLongestTrip"
+            android:hint="@string/longestPossibleTrip"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/longestTripText"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/setlimit"
+            android:visibility="gone"
+            android:hint="@string/enterLongestTrip"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/acceptLongestTrip"/>
+
+        <View android:background="#a8a8a6"
+            android:layout_width = "match_parent"
+            android:layout_height="0.75dp"
+            android:layout_below="@+id/setlimit"
+            android:id="@+id/separatorLine4"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/distanceTitle"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:id="@+id/amountTitle"
+            android:layout_below="@+id/separatorLine4"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/longestPossibleTrip"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:id="@+id/amountText"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/amountTitle"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/setamount"
+            android:hint="@string/enterAmount"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/amountText"/>
+
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sunroofCheckBox"
+            android:layout_below="@+id/setamount"
             android:layout_marginTop="35dp"
             android:text="@string/next"
             android:textSize="18sp"
@@ -388,6 +510,5 @@
             android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
-
 
 </ScrollView>

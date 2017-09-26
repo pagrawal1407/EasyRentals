@@ -9,12 +9,12 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +24,11 @@ import com.borax12.materialdaterangepicker.time.RadialPickerLayout;
 import com.borax12.materialdaterangepicker.time.TimePickerDialog;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 //import android.widget.Button;
 
@@ -33,7 +37,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView selectDate, selectTime;
     private ActionBarDrawerToggle mToggle;
     private EditText searchBar;
-    private CheckBox withDriver, withoutDriver;
+    private CheckBox withDriverCheckBox, withoutDriverCheckBox;
+    private Date startDate, endDate;
+    private String start, end;
+    private Boolean withDriver, withoutDriver;
     //private Button bookNow;
 
     @Override
@@ -58,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchBar = (EditText) findViewById(R.id.search_bar);
         searchBar.setOnEditorActionListener(this);
 
-        withDriver = (CheckBox) findViewById(R.id.withDriver);
-        withoutDriver = (CheckBox) findViewById(R.id.withoutDriver);
+        withDriverCheckBox = (CheckBox) findViewById(R.id.withDriver);
+        withoutDriverCheckBox = (CheckBox) findViewById(R.id.withoutDriver);
     }
 
     @Override
@@ -95,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 //                                calendarStart.set(yearStart, monthStart, dayStart);
 //                                calendarEnd.set(yearEnd, monthEnd, dayEnd);
+                                start = monthStart + "-" + dayStart + "-" + yearStart;
+                                end = monthEnd + "-" + dayEnd + "-" + yearEnd;
                                 selectDate.setText(monthStart+"/"+ dayStart + "/" + yearStart +" to " + monthEnd + "/" + dayEnd + "/" + yearEnd);
 
                             }
@@ -144,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         selectTime.setText(time);
 
+        start = start + " " + hourString + ":" + minuteString;
+        end = end + " " + hourString + ":" + minuteString;
 
     }
 
@@ -161,10 +172,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         InputMethodManager in = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(searchBar.getWindowToken(), 0);
 
+        assignDates();
+        assignCheckBoxes();
+
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
         Intent carListIntent = new Intent(this, CarListActivity.class);
         carListIntent.putExtra("Location", text);
+        carListIntent.putExtra("Start Date", startDate);
+        carListIntent.putExtra("End Date", endDate);
+        carListIntent.putExtra("with driver", withDriver);
+        carListIntent.putExtra("without driver", withoutDriver);
         startActivity(carListIntent);
+
+    }
+
+    private void assignDates(){
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm", Locale.US);
+        try {
+            startDate = format.parse(start);
+            endDate = format.parse(end);
+            Log.i("Start Date: ", startDate.toString());
+            Log.i("End Date: ", endDate.toString());
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
 
@@ -174,13 +206,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         text = searchBar.getText().toString();
 
-        if (text == null){
+        if (ifNull(text)){
             Toast.makeText(this, "Please enter a search location", Toast.LENGTH_SHORT).show();
         }
         else {
+            assignDates();
+            assignCheckBoxes();
+
             Intent carListIntent = new Intent(this, CarListActivity.class);
             carListIntent.putExtra("Location", text);
+            carListIntent.putExtra("Start Date", startDate);
+            carListIntent.putExtra("End Date", endDate);
+            carListIntent.putExtra("with driver", withDriver);
+            carListIntent.putExtra("without driver", withoutDriver);
+
+            Log.i("URL value", "http://45.79.76.22/EasyRentals/EasyRentals/car/findByDistance" +
+                    "&dist=20&withDriver=" + withDriver + "&withoutDriver=" + withoutDriver + "&startDate=" + startDate + "&endDate=" + endDate);
             startActivity(carListIntent);
         }
+    }
+
+    private void assignCheckBoxes() {
+        if (withoutDriverCheckBox.isChecked()){
+            withoutDriver = true;
+        }
+        else withoutDriver = false;
+        if (withDriverCheckBox.isChecked()){
+            withDriver = true;
+        }
+        else withDriver = false;
+    }
+
+    private Boolean ifNull(String... args){
+        Boolean result = false;
+        for (String arg : args) {
+            if (arg.equals("")) {
+                result = true;
+            }
+        }
+        return result;
     }
 }

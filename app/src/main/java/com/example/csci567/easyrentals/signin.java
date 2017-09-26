@@ -76,7 +76,7 @@ public class signin extends Activity {
 
     private void volleyCall(String emailInput, String passwdInput) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String URL = "http://45.79.76.22:9080/EasyRentals/EasyRentals/getUserDetails";
+        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/EasyRentals/getUserDetails";
 
         Map<String,String> jsonparams = new HashMap<>();
         jsonparams.put("email",emailInput);
@@ -98,10 +98,10 @@ public class signin extends Activity {
                         }
                         if (msg != null) {
                             if (!msg.equals("false") ){
-                                /*Intent intent = new Intent(getBaseContext(), WelcomePage.class);
-                                Toasto.makeText(signin.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
-                                intent.putExtra("name", msg);
-                                startActivity(intent);*/
+                                Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
+                                Toast.makeText(signin.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
+                                //intent.putExtra("name", msg);
+                                startActivity(intent);
                             }
                             else {
                                 Toast.makeText(signin.this, "Incorrect Username or Password", Toast.LENGTH_LONG).show();

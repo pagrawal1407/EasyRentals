@@ -7,10 +7,9 @@ import android.location.Location;
  */
 
 public class CustomAddress {
-    public String street1;
-    public String steert2;
-    public String City;
-    public String State;
+    public String street;
+    public String city;
+    public String state;
     public int zipcode;
     public Location geoLocation;
 }

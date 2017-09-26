@@ -27,12 +27,12 @@
         <activity android:name=".InteriorImageUpload" />
         <activity android:name=".ExteriorImageUpload" />
         <activity android:name=".phoneNumberVerification" />
-        <activity android:name=".AdvancedNotice" />
         <activity android:name=".InsuranceDetails" />
         <activity android:name=".signin" />
         <activity android:name=".signup" />
         <activity android:name=".SignUpChoiceScreen" />
-        <activity android:name=".CarListActivity"></activity>
+        <activity android:name=".CarListActivity" />
+        <activity android:name=".FinalMessageActivity"></activity>
     </application>
 
 </manifest>
