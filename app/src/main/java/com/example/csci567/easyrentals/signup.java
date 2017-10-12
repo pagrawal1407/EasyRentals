@@ -23,9 +23,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import utility.UserPreferences;
+
 public class signup extends AppCompatActivity {
 
     public TextView memberText;
+    private UserPreferences userPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class signup extends AppCompatActivity {
         passwd = (EditText) findViewById(R.id.signup_password);
 
         memberText = (TextView)findViewById(R.id.membertext);
+
+        userPreferences = new UserPreferences(getApplicationContext());
 
         memberText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +82,7 @@ public class signup extends AppCompatActivity {
                 else {
 
                     if (isValidEmail(emailInput)) {
-                        //volleyCall(fnameInput, lnameInput, emailInput, passwdInput);
+                        volleyCall(fnameInput, lnameInput, emailInput, passwdInput);
                     }
                     else
                         Toast.makeText(signup.this, "Please enter a valid Email.", Toast.LENGTH_LONG).show();
@@ -102,11 +107,11 @@ public class signup extends AppCompatActivity {
         return result;
     }
 
-    private void volleyCall(String fnameInput, String lnameInput, String emailInput, String passwdInput) {
+    private void volleyCall(final String fnameInput, final String lnameInput, final String emailInput, String passwdInput) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String URL = "http://45.79.76.22/EasyRentals/EasyRentals/EasyRentals/registerUser";
 
-        Map<String,String> jsonparams = new HashMap<String, String>();
+        Map<String,String> jsonparams = new HashMap<>();
 
         jsonparams.put("fName",fnameInput);
         jsonparams.put("lName",lnameInput);
@@ -127,6 +132,11 @@ public class signup extends AppCompatActivity {
                         }
                         if (msg != null) {
                             if (msg.equals("Thanks for Signup") ){
+
+                                userPreferences.saveEmail(emailInput);
+                                userPreferences.saveFirstName(fnameInput);
+                                userPreferences.saveLastName(lnameInput);
+
                                 Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
                                 Toast.makeText(signup.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
                                 startActivity(intent);

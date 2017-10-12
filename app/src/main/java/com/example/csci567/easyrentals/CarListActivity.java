@@ -108,8 +108,8 @@ public class CarListActivity extends AppCompatActivity {
                                /* data.zipcode = singleItem.optInt("zipcode", 0);
                                 data.latitude = singleItem.optDouble("latitude", 0);
                                 data.longitude = singleItem.optDouble("longitude", 0);*/
-                                data.address.geoLocation.setLatitude(geoLocation.optDouble("latitude" , 0));
-                                data.address.geoLocation.setLongitude(geoLocation.optDouble("longitude" , 0));
+                                data.l.setLatitude(geoLocation.optDouble("latitude" , 0));
+                                data.l.setLongitude(geoLocation.optDouble("longitude" , 0));
                                 data.address.city = address.optString("city", "city");
                                 data.address.state = address.optString("state", "state");
                                 data.address.street = address.optString("street", "street");

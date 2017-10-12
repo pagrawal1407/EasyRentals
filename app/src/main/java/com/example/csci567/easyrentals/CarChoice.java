@@ -7,6 +7,7 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,15 +25,19 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
+import utility.AppPreferences;
 import utility.DataPOJO;
 
 public class CarChoice extends AppCompatActivity {
     private android.os.Handler handler;
+    private AppPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_choice);
+
+        appPreferences = new AppPreferences(getApplicationContext());
 
         String jsonmyobject = "";
         Bundle bundle = getIntent().getExtras();
@@ -60,8 +65,14 @@ public class CarChoice extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Address add = addList.get(0);
-            String location = add.getLocality();
+            Address add = null;
+            if (addList != null) {
+                add = addList.get(0);
+            }
+            String location = null;
+            if (add != null) {
+                location = add.getLocality();
+            }
             TextView locationView = (TextView) findViewById(R.id.carChoiceLocation);
             locationView.setText(location);
         }
@@ -71,8 +82,8 @@ public class CarChoice extends AppCompatActivity {
         if (data.transmission != ""  && data.odometer != 0)
             details.setText(data.transmission + " " + ((int) data.odometer) + " miles");
 
-        final RequestQueue queue = Volley.newRequestQueue(this);
-        final String URL = "http://45.79.76.22/EasyRentals/EasyRentals/image/download";
+       // final RequestQueue queue = Volley.newRequestQueue(this);
+        //final String URL = "http://45.79.76.22/EasyRentals/EasyRentals/image/download";
 
         handler = new android.os.Handler();
         final Map<String,String> jsonparams = new HashMap<String, String>();
@@ -86,7 +97,7 @@ public class CarChoice extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                // RequestBody fileBody = RequestBody.create(MediaType.parse(content_type),bos.toByteArray());
-                String URL = "http://45.79.76.22:9080/EasyRentals/image/download" + "?fileName="+data.drivingLicenseNumber;
+                String URL = "http://45.79.76.22/EasyRentals/EasyRentals/image/download" + "?fileName="+data.drivingLicenseNumber + "Exterior1";
 
                 okhttp3.Request request = new okhttp3.Request.Builder()
                         .url(URL)
@@ -113,9 +124,7 @@ public class CarChoice extends AppCompatActivity {
                         }
                     });
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -123,6 +132,17 @@ public class CarChoice extends AppCompatActivity {
         });
 
         t.start();
+
+    }
+
+    public void reserveCar(View view) {
+        String phoneNumber, licPlateNumber;
+
+        phoneNumber = appPreferences.getPhoneNumber();
+        licPlateNumber = appPreferences.getDrivingLicense();
+
+
+
 
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +115,8 @@ public class ListViewAdapter extends BaseAdapter {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 // RequestBody fileBody = RequestBody.create(MediaType.parse(content_type),bos.toByteArray());
-                String URL = "http://45.79.76.22:9080/EasyRentals/image/download" + "?fileName="+data.drivingLicenseNumber;
+                String URL = "http://45.79.76.22/EasyRentals/EasyRentals/image/download" + "?fileName="+data.drivingLicenseNumber + "Exterior1";
+                Log.i("image URL", URL);
 
                 okhttp3.Request request = new okhttp3.Request.Builder()
                         .url(URL)

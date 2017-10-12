@@ -1,14 +1,12 @@
 package com.example.csci567.easyrentals;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -27,7 +25,7 @@ public class phoneNumberVerification extends AppCompatActivity {
     private TextView number;
     private String telephoneNumber;
     private Button sendCode, verifyCode;
-    private ProgressDialog progressDialog;
+    //private ProgressDialog progressDialog;
     private int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE= 999;
     private AppPreferences appPreferences;
 
@@ -54,8 +52,17 @@ public class phoneNumberVerification extends AppCompatActivity {
                 if (verificationCode.getText().toString().equals(code)) {
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-                    Intent listCar = new Intent(getApplicationContext(), CarDetails.class);
-                    startActivity(listCar);
+
+                    if (getCallingActivity() != null){
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("PhoneNumber", telephoneNumber);
+                        setResult(RESULT_OK, resultIntent);
+                        finish();
+                    }
+                    else {
+                        Intent listCar = new Intent(getApplicationContext(), CarDetails.class);
+                        startActivity(listCar);
+                    }
                 }
                 else Toast.makeText(getApplicationContext(), "The code you entered is wrong. Get new code", Toast.LENGTH_LONG ).show();
             }

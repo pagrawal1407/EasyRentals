@@ -464,7 +464,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/distanceTitle"
+            android:text="@string/enterAmount"
             android:textSize="15sp"
             android:textColor="#000000"
             android:id="@+id/amountTitle"
@@ -476,7 +476,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/longestPossibleTrip"
+            android:text="@string/Amount"
             android:textSize="14sp"
             android:textColor="#000"
             android:id="@+id/amountText"

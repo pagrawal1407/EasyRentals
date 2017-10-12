@@ -31,12 +31,16 @@ public class AppPreferences {
     }
 
     public String getDrivingLicense() {
-        return _sharedPrefs.getString(KEY_PREFS_PHONE_NUMBER, "");
+        return _sharedPrefs.getString(KEY_PREFS_DRIVING_LICENSE, "");
     }
 
     public void saveDrivingLicense(String text) {
-        _prefsEditor.putString(KEY_PREFS_PHONE_NUMBER, text);
+        _prefsEditor.putString(KEY_PREFS_DRIVING_LICENSE, text);
         _prefsEditor.commit();
+    }
+
+    public Boolean contains(String text){
+        return _sharedPrefs.contains(text);
     }
 
 }

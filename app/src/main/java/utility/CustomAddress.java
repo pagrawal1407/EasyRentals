@@ -7,6 +7,10 @@ import android.location.Location;
  */
 
 public class CustomAddress {
+
+    CustomAddress(Location l){
+        geoLocation = l;
+    }
     public String street;
     public String city;
     public String state;
