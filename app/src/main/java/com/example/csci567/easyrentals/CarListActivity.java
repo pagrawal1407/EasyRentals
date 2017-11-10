@@ -79,6 +79,9 @@ public class CarListActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String URL;
        //Log.d("Search query","Query: " + query);
+        Log.i("startDate: ", startDate.toString());
+        Log.i("endDate: ", endDate.toString());
+
         if (!ifNull(latitude, longitude) ) {
             URL = "http://45.79.76.22/EasyRentals/EasyRentals/car/findByDistance" + "?long=" + longitude + "&lat=" + latitude +
                     "&dist=20&withDriver=" + withDriver + "&withoutDriver=" + withoutDriver + "&startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime();
@@ -123,7 +126,7 @@ public class CarListActivity extends AppCompatActivity {
 
                                 data.drivingLicenseNumber = singleItem.optString("drivingLicenseNumber", "null");
                                 data.drivingLicenseState = singleItem.optString("drivingLicenseState", "null");
-
+                                data.licenseNumber = singleItem.optString("licenseNum", "null");
                                 data.maximumDistance = singleItem.optString("maximumDistance", "longestDistance");
                                 data.audioPlayer = singleItem.optString("audioPlayer", "audioPlayer");
                                 data.bluetooth = singleItem.optString("bluetooth", "bluetooth");
@@ -150,6 +153,8 @@ public class CarListActivity extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent carChoiceIntent = new Intent(getApplicationContext(), CarChoice.class);
                                 carChoiceIntent.putExtra("DataPOJO object", new Gson().toJson(list.get(position)));
+                                carChoiceIntent.putExtra("Start Date", startDate);
+                                carChoiceIntent.putExtra("End Date", endDate);
                                 startActivity(carChoiceIntent);
                             }
                         });

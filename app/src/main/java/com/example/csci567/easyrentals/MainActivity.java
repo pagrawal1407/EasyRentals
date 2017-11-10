@@ -83,6 +83,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("searchBar",searchBar.getText().toString());
+        outState.putString("dates", selectDate.getText().toString());
+        outState.putString("time", selectTime.getText().toString());
+        outState.putBoolean("withDriver", withDriverCheckBox.isChecked());
+        outState.putBoolean("withoutDriver", withoutDriverCheckBox.isChecked());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        searchBar.setText(savedInstanceState.getString("searchBar"));
+        selectDate.setText(savedInstanceState.getString("dates"));
+        selectTime.setText(savedInstanceState.getString("time"));
+        withDriverCheckBox.setChecked(savedInstanceState.getBoolean("withDriver"));
+        withoutDriverCheckBox.setChecked(savedInstanceState.getBoolean("withoutDriver"));
+    }
+
     private void selectedItem(MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_acc:
@@ -276,5 +298,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return result;
+    }
+
+    public void listCarItem(MenuItem item) {
+        Intent verifyPhone = new Intent(this, phoneNumberVerification.class);
+        startActivity(verifyPhone);
     }
 }

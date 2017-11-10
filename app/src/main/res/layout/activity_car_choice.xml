@@ -9,11 +9,18 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <ImageView
+        <android.support.v4.view.ViewPager
+            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/viewpager1"
+            />
+
+
+      <!--  <ImageView
             android:layout_width="350dp"
             android:layout_height="350dp"
             android:id="@+id/car_image"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"/>-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,7 +28,7 @@
             android:id="@+id/carImageName"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/car_image"
+            android:layout_below="@id/viewpager1"
             android:layout_marginTop="15dp"/>
 
         <TextView

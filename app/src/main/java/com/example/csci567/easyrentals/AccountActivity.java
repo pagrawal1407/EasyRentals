@@ -26,6 +26,9 @@ public class AccountActivity extends AppCompatActivity {
         else {
             Intent phoneNumberIntent = new Intent(getApplicationContext(), phoneNumberVerification.class);
             startActivityForResult(phoneNumberIntent, 999);
+
+            Intent signInIntent = new Intent(getApplicationContext(), signin.class);
+            startActivityForResult(signInIntent, 900);
         }
 
     }
@@ -38,8 +41,12 @@ public class AccountActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK && requestCode == 999){
             telephoneNumber = data.getStringExtra("PhoneNumber");
+        }
+
+        if (resultCode == RESULT_OK && requestCode == 900){
+            String email = data.getStringExtra("Email");
         }
     }
 }

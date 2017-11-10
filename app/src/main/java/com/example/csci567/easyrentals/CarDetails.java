@@ -5,6 +5,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,7 +37,7 @@ import java.util.Map;
 import utility.AppPreferences;
 
 public class CarDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private EditText address, city, make, model, odometer, drivingLicenseNumber, zipcode, setLimit, setAmount;
+    private EditText address, city, make, model, odometer, drivingLicenseNumber, zipcode, setLimit, setAmount, licensePlate;
     private Spinner year, transmission, style, state, drivingLicenseState, longestDist;
     private CheckBox gps, hybrid, petFriendly, bluetooth, audioPlayer, sunRoof, withDriverCheckBox, withoutDriverCheckBox;
     private String yearText, transmissionText, styleText, stateText, licenseStateText, longestTrip;
@@ -91,6 +93,17 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         drivingLicenseState.setOnItemSelectedListener(this);
         longestDist.setOnItemSelectedListener(this);
 
+       /* setAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                setAmount.setText("Rs  " + setAmount.getText().toString());
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });*/
+
     }
 
     private void initializeCheckBoxes() {
@@ -123,6 +136,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         zipcode = (EditText) findViewById(R.id.acceptZipCode);
         setLimit = (EditText) findViewById(R.id.setlimit);
         setAmount = (EditText) findViewById(R.id.setamount);
+        licensePlate = (EditText) findViewById(R.id.acceptlicensePlate);
     }
 
     private Boolean ifNull(String... args){
@@ -137,7 +151,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
 
     public void onNextPressed(View view) {
 
-        String addressText, cityText, makeText, modelText, odometerText, drivingLicenseNumberText, zipcodeText;
+        String addressText, cityText, makeText, modelText, odometerText, drivingLicenseNumberText, zipcodeText, licensePlateText;
         String gpsText, hybridText, petFriendlyText, bluetoothText, audioText, sunRoofText;
         String limit, withDriver, withoutDriver, amount;
 
@@ -156,6 +170,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         drivingLicenseNumberText = drivingLicenseNumber.getText().toString();
         zipcodeText = zipcode.getText().toString();
         amount = setAmount.getText().toString();
+        licensePlateText = licensePlate.getText().toString();
 
 
         if (gps.isChecked())
@@ -255,6 +270,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         jsonparams.put("withDriver", withDriver);
         jsonparams.put("withoutDriver", withoutDriver);
         jsonparams.put("amount", amount);
+        jsonparams.put("licenseNum", licensePlateText);
         Toast.makeText(this, transmissionText + " " + yearText + " " + styleText,Toast.LENGTH_SHORT).show();
 
         appPreferences.saveDrivingLicense(drivingLicenseNumberText);
@@ -269,6 +285,70 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         startActivity(nextIntent);*/
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("address", address.getText().toString());
+        outState.putString("city", city.getText().toString());
+        outState.putInt("state", state.getSelectedItemPosition());
+        outState.putInt("licenseState", drivingLicenseState.getSelectedItemPosition());
+        outState.putInt("year", year.getSelectedItemPosition());
+        outState.putInt("transmission", transmission.getSelectedItemPosition());
+        outState.putInt("style", style.getSelectedItemPosition());
+        outState.putInt("longestTrip", longestDist.getSelectedItemPosition());
+        if (longestTrip.equals( "Set Limit"))
+            outState.putString("limit", setLimit.getText().toString());
+
+        outState.putString("licenseNumber", drivingLicenseNumber.getText().toString());
+        outState.putString("zipcode", zipcode.getText().toString());
+        outState.putString("make", make.getText().toString());
+        outState.putString("model", model.getText().toString());
+        outState.putString("odometer", odometer.getText().toString());
+        outState.putString("rentAmount", setAmount.getText().toString());
+
+        outState.putBoolean("gps", gps.isChecked());
+        outState.putBoolean("hybrid", hybrid.isChecked());
+        outState.putBoolean("sunRoof", sunRoof.isChecked());
+        outState.putBoolean("bluetooth", bluetooth.isChecked());
+        outState.putBoolean("petFriendly", petFriendly.isChecked());
+        outState.putBoolean("audioPlayer", audioPlayer.isChecked());
+        outState.putBoolean("withDriver", withDriverCheckBox.isChecked());
+        outState.putBoolean("withDriver", withDriverCheckBox.isChecked());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null) {
+
+            address.setText(savedInstanceState.getString("address", ""));
+            city.setText(savedInstanceState.getString("city", ""));
+            zipcode.setText(savedInstanceState.getString("zipcode", ""));
+            drivingLicenseNumber.setText(savedInstanceState.getString("licenseNumber", ""));
+            make.setText(savedInstanceState.getString("make", ""));
+            model.setText(savedInstanceState.getString("model", ""));
+            odometer.setText(savedInstanceState.getString("odometer", ""));
+            setAmount.setText(savedInstanceState.getString("rentAmount", ""));
+
+            gps.setChecked(savedInstanceState.getBoolean("gps", false));
+            hybrid.setChecked(savedInstanceState.getBoolean("hybrid", false));
+            sunRoof.setChecked(savedInstanceState.getBoolean("sunRoof", false));
+            bluetooth.setChecked(savedInstanceState.getBoolean("bluetooth", false));
+            petFriendly.setChecked(savedInstanceState.getBoolean("petFriendly", false));
+            audioPlayer.setChecked(savedInstanceState.getBoolean("audioPlayer", false));
+            withDriverCheckBox.setChecked(savedInstanceState.getBoolean("withDriver", false));
+            withoutDriverCheckBox.setChecked(savedInstanceState.getBoolean("withoutDriver", false));
+
+            drivingLicenseState.setSelection(savedInstanceState.getInt("licenseState", 0));
+            state.setSelection(savedInstanceState.getInt("state", 0));
+            year.setSelection(savedInstanceState.getInt("year", 0));
+            transmission.setSelection(savedInstanceState.getInt("transmission", 0));
+            style.setSelection(savedInstanceState.getInt("style", 0));
+            longestDist.setSelection(savedInstanceState.getInt("longestTrip", 0));
+        }
+    }
 
     private void volleycall(Map jsonparams) {
 
@@ -277,7 +357,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         String URL = "http://45.79.76.22/EasyRentals/EasyRentals/car/listyourcar";
 
         Toast.makeText(this,"Sending data",Toast.LENGTH_SHORT).show();
-        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(jsonparams),
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, URL, new JSONObject(jsonparams),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

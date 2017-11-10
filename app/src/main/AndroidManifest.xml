@@ -34,7 +34,8 @@
         <activity android:name=".CarListActivity" />
         <activity android:name=".CarChoice" />
         <activity android:name=".FinalMessageActivity" />
-        <activity android:name=".AccountActivity"></activity>
+        <activity android:name=".AccountActivity" />
+        <activity android:name=".CustomSwipeAdapter"></activity>
     </application>
 
 </manifest>

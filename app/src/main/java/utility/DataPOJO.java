@@ -29,4 +29,5 @@ public class DataPOJO {
     public Boolean withDriver;
     public Boolean withoutDriver;
     public int amount;
+    public String licenseNumber;
 }

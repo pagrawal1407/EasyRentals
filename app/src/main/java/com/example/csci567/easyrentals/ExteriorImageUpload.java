@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
@@ -95,6 +96,8 @@ public class ExteriorImageUpload extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 String content_type = getMimeType(imageName);
+                Log.i("ImageName", imageName);
+                Log.i("Content Type", content_type);
 
                 //Bitmap bmp = BitmapFactory.decodeFile(selectedPath);
                 int height = compressedImageFile.getHeight();

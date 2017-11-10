@@ -238,6 +238,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/odometer"
+            android:inputType="number"
             android:layout_below="@+id/odometerText"
             android:id="@+id/acceptOdometer"
             android:layout_marginStart="15dp"
@@ -265,10 +266,33 @@
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/licensePlate"
+            android:textSize="12sp"
+            android:id="@+id/licensePlateNumber"
+            android:layout_below="@+id/acceptStyle"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enterLicensePlate"
+            android:inputType="number"
+            android:layout_below="@+id/licensePlateNumber"
+            android:id="@+id/acceptlicensePlate"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            />
+
+
         <View android:background="#a8a8a6"
             android:layout_width = "match_parent"
             android:layout_height="0.75dp"
-            android:layout_below="@+id/acceptStyle"
+            android:layout_below="@+id/acceptlicensePlate"
             android:id="@+id/separatorLine1"
             android:layout_marginTop="25dp"
             android:layout_marginStart="15dp"

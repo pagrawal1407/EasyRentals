@@ -36,14 +36,17 @@ public class signin extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.signin_email);
         passwd = (EditText) findViewById(R.id.signin_password);
-        TextView newMemberText = (TextView) findViewById(R.id.notmembertext);
+        final TextView newMemberText = (TextView) findViewById(R.id.notmembertext);
 
         userPreferences = new UserPreferences(getApplicationContext());
 
         newMemberText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent newSignupActivity = new Intent(getApplicationContext(),signup.class);
+                if (getCallingActivity() != null)
+                    newSignupActivity.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(newSignupActivity);
                 finish();
             }
@@ -80,7 +83,7 @@ public class signin extends AppCompatActivity {
 
     private void volleyCall(final String emailInput, String passwdInput) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/EasyRentals/getUserDetails";
+        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/getUserDetails";
 
         Map<String,String> jsonparams = new HashMap<>();
         jsonparams.put("email",emailInput);
@@ -106,10 +109,19 @@ public class signin extends AppCompatActivity {
                                 if (!userPreferences.contains(UserPreferences.KEY_PREFS_EMAIL)){
                                     userPreferences.saveEmail(emailInput);
                                 }
-                                Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
-                                Toast.makeText(signin.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
-                                //intent.putExtra("name", msg);
-                                startActivity(intent);
+
+                                if (getCallingActivity() != null){
+                                    Intent resultIntent = new Intent();
+                                    resultIntent.putExtra("Email", emailInput);
+                                    setResult(RESULT_OK, resultIntent);
+                                    finish();
+                                }
+                                else {
+                                    Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
+                                    Toast.makeText(signin.this, "Success, you are logged in", Toast.LENGTH_SHORT).show();
+                                    //intent.putExtra("name", msg);
+                                    startActivity(intent);
+                                }
 
                             }
                             else {

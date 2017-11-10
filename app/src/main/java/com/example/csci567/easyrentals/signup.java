@@ -109,7 +109,7 @@ public class signup extends AppCompatActivity {
 
     private void volleyCall(final String fnameInput, final String lnameInput, final String emailInput, String passwdInput) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/EasyRentals/registerUser";
+        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/registerUser";
 
         Map<String,String> jsonparams = new HashMap<>();
 
