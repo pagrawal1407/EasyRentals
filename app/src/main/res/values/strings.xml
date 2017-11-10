@@ -81,6 +81,13 @@
     <string name="driverTitle">Please select with or without driver option</string>
     <string name="distanceTitle">Please select the maximum distance allowed</string>
     <string name="enterAmount">Enter suitable rent amount</string>
+    <string name="Amount">Enter rental amount</string>
+    <string name="reservecar">Reserve Car</string>
+    <string name="more_options">More Options</string>
+    <string name="log_out">Log Out</string>
+    <string name="my_account">My Account</string>
+    <string name="licensePlate">License Plate Number</string>
+    <string name="enterLicensePlate">Enter the number on license Plate</string>
 
 
     <string-array name="transmissionArray">

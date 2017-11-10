@@ -1,8 +1,8 @@
 package com.example.csci567.easyrentals;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +23,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class signin extends Activity {
-    public EditText email, passwd;
-    public Button signin;
-    public TextView newMemberText;
+import utility.UserPreferences;
+
+public class signin extends AppCompatActivity {
+    private EditText email, passwd;
+    private UserPreferences userPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,18 +36,23 @@ public class signin extends Activity {
 
         email = (EditText) findViewById(R.id.signin_email);
         passwd = (EditText) findViewById(R.id.signin_password);
-        newMemberText = (TextView)findViewById(R.id.notmembertext);
+        final TextView newMemberText = (TextView) findViewById(R.id.notmembertext);
+
+        userPreferences = new UserPreferences(getApplicationContext());
 
         newMemberText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent newSignupActivity = new Intent(getApplicationContext(),signup.class);
+                if (getCallingActivity() != null)
+                    newSignupActivity.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(newSignupActivity);
                 finish();
             }
         });
 
-        signin = (Button) findViewById(R.id.signin_button);
+        Button signin = (Button) findViewById(R.id.signin_button);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +65,7 @@ public class signin extends Activity {
                 else {
 //                    Intent intent = new Intent(getBaseContext(), WelcomePage.class);
 //                    startActivity(intent);
-                    //volleyCall(emailInput,passwdInput);
+                    volleyCall(emailInput,passwdInput);
                 }
             }
         });
@@ -74,9 +81,9 @@ public class signin extends Activity {
         return result;
     }
 
-    private void volleyCall(String emailInput, String passwdInput) {
+    private void volleyCall(final String emailInput, String passwdInput) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/EasyRentals/getUserDetails";
+        String URL = "http://45.79.76.22/EasyRentals/EasyRentals/getUserDetails";
 
         Map<String,String> jsonparams = new HashMap<>();
         jsonparams.put("email",emailInput);
@@ -98,10 +105,24 @@ public class signin extends Activity {
                         }
                         if (msg != null) {
                             if (!msg.equals("false") ){
-                                Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
-                                Toast.makeText(signin.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
-                                //intent.putExtra("name", msg);
-                                startActivity(intent);
+
+                                if (!userPreferences.contains(UserPreferences.KEY_PREFS_EMAIL)){
+                                    userPreferences.saveEmail(emailInput);
+                                }
+
+                                if (getCallingActivity() != null){
+                                    Intent resultIntent = new Intent();
+                                    resultIntent.putExtra("Email", emailInput);
+                                    setResult(RESULT_OK, resultIntent);
+                                    finish();
+                                }
+                                else {
+                                    Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
+                                    Toast.makeText(signin.this, "Success, you are logged in", Toast.LENGTH_SHORT).show();
+                                    //intent.putExtra("name", msg);
+                                    startActivity(intent);
+                                }
+
                             }
                             else {
                                 Toast.makeText(signin.this, "Incorrect Username or Password", Toast.LENGTH_LONG).show();

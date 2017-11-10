@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +36,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, TextView.OnEditorActionListener {
 
+    private DrawerLayout mDrawerLayout;
     private TextView selectDate, selectTime;
     private ActionBarDrawerToggle mToggle;
     private EditText searchBar;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Date startDate, endDate;
     private String start, end;
     private Boolean withDriver, withoutDriver;
+    private NavigationView navigationView;
     //private Button bookNow;
 
     @Override
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
@@ -67,6 +71,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         withDriverCheckBox = (CheckBox) findViewById(R.id.withDriver);
         withoutDriverCheckBox = (CheckBox) findViewById(R.id.withoutDriver);
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                selectedItem(item);
+                return false;
+            }
+        });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("searchBar",searchBar.getText().toString());
+        outState.putString("dates", selectDate.getText().toString());
+        outState.putString("time", selectTime.getText().toString());
+        outState.putBoolean("withDriver", withDriverCheckBox.isChecked());
+        outState.putBoolean("withoutDriver", withoutDriverCheckBox.isChecked());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        searchBar.setText(savedInstanceState.getString("searchBar"));
+        selectDate.setText(savedInstanceState.getString("dates"));
+        selectTime.setText(savedInstanceState.getString("time"));
+        withDriverCheckBox.setChecked(savedInstanceState.getBoolean("withDriver"));
+        withoutDriverCheckBox.setChecked(savedInstanceState.getBoolean("withoutDriver"));
+    }
+
+    private void selectedItem(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_acc:
+                accountActivity();
+                mDrawerLayout.closeDrawers();
+                break;
+
+            case R.id.nav_log_out:
+                try {
+                    end(item);
+                    mDrawerLayout.closeDrawers();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
 
     @Override
@@ -74,6 +128,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
+    }
+
+    private void accountActivity() {
+        Intent accountIntent = new Intent(getApplicationContext(), AccountActivity.class);
+        startActivity(accountIntent);
     }
 
     public void listCar(View view){
@@ -227,14 +286,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void assignCheckBoxes() {
-        if (withoutDriverCheckBox.isChecked()){
-            withoutDriver = true;
-        }
-        else withoutDriver = false;
-        if (withDriverCheckBox.isChecked()){
-            withDriver = true;
-        }
-        else withDriver = false;
+        withoutDriver = withoutDriverCheckBox.isChecked();
+        withDriver = withDriverCheckBox.isChecked();
     }
 
     private Boolean ifNull(String... args){
@@ -245,5 +298,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return result;
+    }
+
+    public void listCarItem(MenuItem item) {
+        Intent verifyPhone = new Intent(this, phoneNumberVerification.class);
+        startActivity(verifyPhone);
     }
 }

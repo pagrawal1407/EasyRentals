@@ -1,12 +1,16 @@
 package utility;
 
+import android.location.Location;
+
 /**
  * Created by Parag on 7/5/2017.
  */
 
 public class DataPOJO {
 
-    public CustomAddress address;
+
+    public Location l = new Location("");
+    public CustomAddress address = new CustomAddress(l);
     public int year;
     public String make;
     public String model;
@@ -25,4 +29,5 @@ public class DataPOJO {
     public Boolean withDriver;
     public Boolean withoutDriver;
     public int amount;
+    public String licenseNumber;
 }

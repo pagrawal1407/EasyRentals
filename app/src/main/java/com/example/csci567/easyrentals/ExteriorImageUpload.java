@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
@@ -69,11 +70,18 @@ public class ExteriorImageUpload extends AppCompatActivity {
     public void onNextPressed(View view) {
         int counter = 0;
         for (final String selectedImageIterator:selectedPath) {
-            uploadImage(selectedImageIterator, counter);
-            counter++;
+            if (!ifNull(selectedImageIterator)) {
+                uploadImage(selectedImageIterator, counter);
+                counter++;
+            }
         }
-        Intent intent = new Intent(this, InteriorImageUpload.class);
-        startActivity(intent);
+
+        //if (!ifNull(selectedPath)) {
+            Intent intent = new Intent(this, InteriorImageUpload.class);
+            startActivity(intent);
+       // }
+        //else
+          //  Toast.makeText(getApplicationContext(), "Please upload all the images.", Toast.LENGTH_SHORT).show();
     }
 
     private void uploadImage(final String imageName, final int counter){
@@ -88,6 +96,8 @@ public class ExteriorImageUpload extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 String content_type = getMimeType(imageName);
+                Log.i("ImageName", imageName);
+                Log.i("Content Type", content_type);
 
                 //Bitmap bmp = BitmapFactory.decodeFile(selectedPath);
                 int height = compressedImageFile.getHeight();
@@ -214,5 +224,15 @@ public class ExteriorImageUpload extends AppCompatActivity {
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    }
+
+    private Boolean ifNull(String... args){
+        Boolean result = false;
+        for (String arg : args) {
+            if (arg.equals("")) {
+                result = true;
+            }
+        }
+        return result;
     }
 }
