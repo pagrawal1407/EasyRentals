@@ -69,6 +69,15 @@
     <string name="my_account">My Account</string>
     <string name="licensePlate">License Plate Number</string>
     <string name="enterLicensePlate">Enter the number on license Plate</string>
+    <string name="carPictures">Please Upload 3 Car Pictures</string>
+    <string name="imageText2">Image 2</string>
+    <string name="imageText3">Image 3</string>
+    <string name="imageText1">Image 1</string>
+    <string name="ThankYouText">Thank you for publishing your car with us.   We are happy to help you earn more</string>
+    <string name="Home">Home</string>
+    <string name="carPictures2">Upload Your License and ID Images</string>
+    <string name="licenseText">Upload License Image</string>
+    <string name="IDImage">Upload ID image</string>
 
 
     <string-array name="transmissionArray">

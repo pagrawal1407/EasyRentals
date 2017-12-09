@@ -44,18 +44,17 @@
                 android:layout_marginTop="200dp"
                 android:layout_centerHorizontal="true"/>
 
-            <EditText
+            <AutoCompleteTextView
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/searchText"
                 android:layout_below="@+id/mainImage"
                 android:layout_marginTop="10dp"
+                android:textSize="15sp"
                 android:layout_centerHorizontal="true"
-                android:drawableLeft="@drawable/ic_action_search"
-                android:drawableStart="@drawable/ic_action_search"
-                android:id="@+id/search_bar"
-                android:imeOptions="actionSearch"
-                android:inputType="text" />
+                android:drawableRight="@drawable/ic_action_search"
+                android:drawableEnd="@drawable/ic_action_search"
+                android:id="@+id/search_bar"/>
 
             <TextView
                 android:layout_width="wrap_content"
