@@ -163,7 +163,7 @@ public class CarChoice extends AppCompatActivity {
 
     public void reserveCar(View view) {
 
-        if (appPreferences.contains(appPreferences.KEY_PREFS_PHONE_NUMBER) && userPreferences.contains(userPreferences.KEY_PREFS_EMAIL)) {
+        if (appPreferences.contains(AppPreferences.KEY_PREFS_PHONE_NUMBER) && userPreferences.contains(UserPreferences.KEY_PREFS_EMAIL)) {
             telephoneNumber = appPreferences.getPhoneNumber();
             licPlateNumber = appPreferences.getDrivingLicense();
 
@@ -222,13 +222,15 @@ public class CarChoice extends AppCompatActivity {
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
-                        if (msg.equals("Saved") ){
-                            Intent intent = new Intent(getBaseContext(), ExteriorImageUpload.class);
-                            Toast.makeText(CarChoice.this,"Success, data sent",Toast.LENGTH_SHORT).show();
-                            startActivity(intent);
-                        }
-                        else {
-                            Toast.makeText(CarChoice.this, "Data not sent. Look for error!", Toast.LENGTH_LONG).show();
+                        if (msg != null) {
+                            if (msg.equals("Saved") ){
+                                Intent intent = new Intent(getBaseContext(), ExteriorImageUpload.class);
+                                Toast.makeText(CarChoice.this,"Success, data sent",Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(CarChoice.this, "Data not sent. Look for error!", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.csci567.easyrentals.UserDetailsUpload">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/carPictures2"
+            android:textSize="25sp"
+            android:id="@+id/newCarImageText"/>
+
+
+        <TextView
+            android:id="@+id/image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/licenseText"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:layout_below="@id/newCarImageText"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/image_show1"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/image1"
+            android:layout_alignParentRight="true"
+            tools:ignore="ContentDescription"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uploadImage"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:background="#000"
+            android:id="@+id/imageUploadButton1"
+            android:layout_below="@+id/image_show1"
+            android:onClick="uploadOptions"/>
+
+        <TextView
+            android:id="@+id/image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/IDImage"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:layout_below="@id/imageUploadButton1"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/image_show2"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/image2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            tools:ignore="ContentDescription"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uploadImage"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:background="#000"
+            android:id="@+id/imageUploadButton2"
+            android:layout_below="@+id/image_show2"
+            android:onClick="uploadOptions"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:id="@+id/nextButton"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="#000"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/imageUploadButton2"
+            android:onClick="onNextPressed"/>
+
+    </RelativeLayout>
+
+</ScrollView>

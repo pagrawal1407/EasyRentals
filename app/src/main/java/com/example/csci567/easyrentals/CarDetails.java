@@ -3,10 +3,8 @@ package com.example.csci567.easyrentals;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.seatgeek.placesautocomplete.PlacesAutocompleteTextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,11 +36,12 @@ import java.util.Map;
 import utility.AppPreferences;
 
 public class CarDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private EditText address, city, make, model, odometer, drivingLicenseNumber, zipcode, setLimit, setAmount, licensePlate;
+    private EditText  city, make, model, odometer, drivingLicenseNumber, zipcode, setLimit, setAmount, licensePlate;
     private Spinner year, transmission, style, state, drivingLicenseState, longestDist;
     private CheckBox gps, hybrid, petFriendly, bluetooth, audioPlayer, sunRoof, withDriverCheckBox, withoutDriverCheckBox;
     private String yearText, transmissionText, styleText, stateText, licenseStateText, longestTrip;
     private AppPreferences appPreferences;
+    private PlacesAutocompleteTextView address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
         hybrid = (CheckBox) findViewById(R.id.HybridCheckBox);
         petFriendly = (CheckBox) findViewById(R.id.PetfriendlyCheckBox);
         bluetooth = (CheckBox) findViewById(R.id.BluetoothCheckBox);
-        audioPlayer = (CheckBox) findViewById(R.id.AudioCheckBox);
+        audioPlayer = findViewById(R.id.AudioCheckBox);
         sunRoof = (CheckBox) findViewById(R.id.sunroofCheckBox);
         withoutDriverCheckBox = (CheckBox) findViewById(R.id.withoutDriver);
         withDriverCheckBox = (CheckBox) findViewById(R.id.withDriver);
@@ -127,7 +127,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
     }
 
     private void initializeEditTexts() {
-        address = (EditText) findViewById(R.id.acceptAddress);
+        address = (PlacesAutocompleteTextView) findViewById(R.id.acceptAddress);
         city = (EditText) findViewById(R.id.acceptCity);
         make = (EditText) findViewById(R.id.acceptMake);
         model = (EditText) findViewById(R.id.acceptModel);
@@ -370,7 +370,7 @@ public class CarDetails extends AppCompatActivity implements AdapterView.OnItemS
                             e.printStackTrace();
                         }
                         if (msg.equals("Saved") ){
-                            Intent intent = new Intent(getBaseContext(), ExteriorImageUpload.class);
+                            Intent intent = new Intent(getBaseContext(), ImageUpload.class);
                             Toast.makeText(CarDetails.this,"Success, data sent",Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         }

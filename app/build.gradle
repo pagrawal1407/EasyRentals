@@ -19,6 +19,12 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    google()
+}
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -34,5 +40,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'id.zelory:compressor:2.1.0'
+    compile 'com.seatgeek:placesautocomplete:0.3-SNAPSHOT'
+    compile 'com.google.android.gms:play-services-location:10.+'
     testCompile 'junit:junit:4.12'
 }

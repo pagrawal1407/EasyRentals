@@ -33,7 +33,7 @@ import utility.DataPOJO;
 public class CarListActivity extends AppCompatActivity {
 
     private Date startDate, endDate;
-    private String location;
+    private String location, latitude, longitude;
     private Boolean withDriver, withoutDriver;
 
     @Override
@@ -43,11 +43,23 @@ public class CarListActivity extends AppCompatActivity {
 
         startDate = (Date)getIntent().getSerializableExtra("Start Date");
         endDate = (Date)getIntent().getSerializableExtra("End Date");
-        location = getIntent().getStringExtra("Location");
+
+        if (getIntent().hasExtra("Location"))
+            location = getIntent().getStringExtra("Location");
+
+        if (getIntent().hasExtra("Latitude"))
+            latitude = getIntent().getStringExtra("Latitude");
+
+        if (getIntent().hasExtra("Longitude"))
+            longitude = getIntent().getStringExtra("Longitude");
+
         withDriver = getIntent().getBooleanExtra("with driver", true);
         withoutDriver = getIntent().getBooleanExtra("without driver", true);
-
-        geoLocationResolver(location);
+        if (location != null) {
+            geoLocationResolver(location);
+        }
+        else
+            volleyCall(longitude, latitude);
     }
 
     private void geoLocationResolver(String location) {

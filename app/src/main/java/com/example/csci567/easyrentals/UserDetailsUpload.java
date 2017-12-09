@@ -23,32 +23,23 @@ import java.io.File;
 import java.io.IOException;
 
 import id.zelory.compressor.Compressor;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
-import utility.AppPreferences;
-
-
-public class ExteriorImageUpload extends AppCompatActivity {
+public class UserDetailsUpload extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 10000;
     private static final int PICK_IMAGE = 1;
     private static final int PICK_IMAGE_2 = 2;
-    private static final int PICK_IMAGE_3 = 3;
-    private static final int PICK_IMAGE_4 = 4;
-    private String [] selectedPath = new String[4];
-    private AppPreferences appPreferences;
+    private String [] selectedPath = new String[3];
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exterior_image_upload);
-        Bundle bundle = getIntent().getExtras();
-        //Toast.makeText(this,bundle.getString("transmission") + " " + bundle.getString("year") + " " + bundle.getString("style"),Toast.LENGTH_LONG).show();
+        setContentView(R.layout.activity_user_details_upload);
 
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -66,7 +57,6 @@ public class ExteriorImageUpload extends AppCompatActivity {
             // app-defined int constant that should be quite unique
 
         }
-        appPreferences = new AppPreferences(getApplicationContext());
     }
 
     public void onNextPressed(View view) {
@@ -79,11 +69,11 @@ public class ExteriorImageUpload extends AppCompatActivity {
         }
 
         //if (!ifNull(selectedPath)) {
-            Intent intent = new Intent(this, InteriorImageUpload.class);
-            startActivity(intent);
-       // }
+        Intent intent = new Intent(this, FinalMessageActivity.class);
+        startActivity(intent);
+        // }
         //else
-          //  Toast.makeText(getApplicationContext(), "Please upload all the images.", Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(getApplicationContext(), "Please upload all the images.", Toast.LENGTH_SHORT).show();
     }
 
     private void uploadImage(final String imageName, final int counter){
@@ -93,7 +83,7 @@ public class ExteriorImageUpload extends AppCompatActivity {
                 File f = new File(imageName);
                 Bitmap compressedImageFile = null;
                 try {
-                    compressedImageFile = new Compressor(ExteriorImageUpload.this).compressToBitmap(f);
+                    compressedImageFile = new Compressor(UserDetailsUpload.this).compressToBitmap(f);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -106,7 +96,7 @@ public class ExteriorImageUpload extends AppCompatActivity {
                 int width= compressedImageFile.getWidth();
                 Bitmap resized = compressedImageFile;
                 if (width > 4096) {
-                   resized  = Bitmap.createScaledBitmap(compressedImageFile, 4050, height, true);
+                    resized  = Bitmap.createScaledBitmap(compressedImageFile, 4050, height, true);
                 }
                 if (height > 4096){
                     int newWidth = resized.getWidth();
@@ -123,7 +113,7 @@ public class ExteriorImageUpload extends AppCompatActivity {
 
                 RequestBody requestBody = new MultipartBody.Builder()
                         .setType(MultipartBody.FORM)
-                        .addFormDataPart("fileName", appPreferences.getDrivingLicense() + "Exterior" + counter)
+                        .addFormDataPart("fileName", "" + "Exterior" + counter)
                         .addFormDataPart("file", imageName.substring(imageName.lastIndexOf('/') + 1), fileBody)
                         .build();
 
@@ -157,21 +147,14 @@ public class ExteriorImageUpload extends AppCompatActivity {
         Intent chooserIntent = Intent.createChooser(intent,"Select picture to upload");
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{takePicture});
         switch (view.getId()){
-            case R.id.upload_button1:
+            case R.id.imageUploadButton1:
                 startActivityForResult(chooserIntent,PICK_IMAGE);
                 break;
 
-            case R.id.upload_button2:
+            case R.id.imageUploadButton2:
                 startActivityForResult(chooserIntent,PICK_IMAGE_2);
                 break;
 
-            case R.id.upload_button3:
-                startActivityForResult(chooserIntent,PICK_IMAGE_3);
-                break;
-
-            case R.id.upload_button4:
-                startActivityForResult(chooserIntent,PICK_IMAGE_4);
-                break;
         }
 
     }
@@ -179,11 +162,11 @@ public class ExteriorImageUpload extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView imageView1, imageView2, imageView3, imageView4;
-        imageView1 = (ImageView) findViewById(R.id.image_display1);
-        imageView2 = (ImageView) findViewById(R.id.image_display2);
-        imageView3 = (ImageView) findViewById(R.id.image_display3);
-        imageView4 = (ImageView) findViewById(R.id.image_display4);
+
+        ImageView imageView1, imageView2;
+        imageView1 = (ImageView) findViewById(R.id.image_show1);
+        imageView2 = (ImageView) findViewById(R.id.image_show2);
+
         if (resultCode == RESULT_OK) {
             Uri selectedImage;
 
@@ -202,19 +185,6 @@ public class ExteriorImageUpload extends AppCompatActivity {
                     Picasso.with(getApplicationContext()).load(selectedImage).fit().centerCrop().into(imageView2);
                     break;
 
-                case PICK_IMAGE_3:
-                    selectedImage = data.getData();
-                    selectedPath[2] = getRealPath(selectedImage);
-                    Toast.makeText(this, "Selected Path: " + selectedPath[2], Toast.LENGTH_LONG).show();
-                    Picasso.with(getApplicationContext()).load(selectedImage).fit().centerCrop().into(imageView3);
-                    break;
-
-                case PICK_IMAGE_4:
-                    selectedImage = data.getData();
-                    selectedPath[3] = getRealPath(selectedImage);
-                    Toast.makeText(this, "Selected Path: " + selectedPath[3], Toast.LENGTH_LONG).show();
-                    Picasso.with(getApplicationContext()).load(selectedImage).fit().centerCrop().into(imageView4);
-                    break;
             }
         }
     }
