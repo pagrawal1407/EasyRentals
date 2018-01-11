@@ -42,9 +42,9 @@ public class SignInNew extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent newSignupActivity = new Intent(getApplicationContext(),signup.class);
-                if (getCallingActivity() != null)
-                    newSignupActivity.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                Intent newSignupActivity = new Intent(getApplicationContext(),SignUpNew.class);
+                /*if (getCallingActivity() != null)
+                    newSignupActivity.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);*/
                 startActivity(newSignupActivity);
                 finish();
             }

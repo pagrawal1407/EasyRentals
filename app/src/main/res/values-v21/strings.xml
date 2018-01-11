@@ -78,6 +78,7 @@
     <string name="carPictures2">Upload Your License and ID Images</string>
     <string name="licenseText">Upload License Image</string>
     <string name="IDImage">Upload ID image</string>
+    <string name="contactNumber">Contact Number</string>
 
 
     <string-array name="transmissionArray">

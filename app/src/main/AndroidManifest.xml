@@ -3,11 +3,15 @@
     package="com.example.csci567.easyrentals">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-feature android:name="android.hardware.Camera2"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -35,11 +39,12 @@
         <activity android:name=".CarChoice" />
         <activity android:name=".FinalMessageActivity" />
         <activity android:name=".AccountActivity" />
-        <!--<activity android:name=".CustomSwipeAdapter" />-->
+        <!-- <activity android:name=".CustomSwipeAdapter" /> -->
         <activity android:name=".SignInNew" />
         <activity android:name=".BusinessInfoPage" />
         <activity android:name=".ImageUpload" />
-        <activity android:name=".UserDetailsUpload"></activity>
+        <activity android:name=".UserDetailsUpload" />
+        <activity android:name=".SignUpNew"></activity>
     </application>
 
 </manifest>

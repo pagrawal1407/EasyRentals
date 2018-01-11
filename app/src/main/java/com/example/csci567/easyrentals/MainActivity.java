@@ -73,14 +73,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         selectDate = (TextView) findViewById(R.id.dateText);
         selectTime = (TextView) findViewById(R.id.timeText);
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void accountActivity() {
-        Intent accountIntent = new Intent(getApplicationContext(), AccountActivity.class);
+        Intent accountIntent = new Intent(getApplicationContext(), SignInNew.class);
         startActivity(accountIntent);
     }
 
@@ -188,9 +188,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 //                                calendarStart.set(yearStart, monthStart, dayStart);
 //                                calendarEnd.set(yearEnd, monthEnd, dayEnd);
-                                start = monthStart + "-" + dayStart + "-" + yearStart;
-                                end = monthEnd + "-" + dayEnd + "-" + yearEnd;
-                                selectDate.setText(monthStart + "/" + dayStart + "/" + yearStart + " to " + monthEnd + "/" + dayEnd + "/" + yearEnd);
+                                start = (monthStart + 1) + "-" + dayStart + "-" + yearStart;
+                                end = (monthEnd+1) + "-" + dayEnd + "-" + yearEnd;
+                                selectDate.setText((monthStart + 1) + "/" + dayStart + "/" + yearStart + " to " + (monthEnd+1) + "/" + dayEnd + "/" + yearEnd);
 
                             }
                         });
