@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.csci567.easyrentals.signup">
+    tools:context="com.example.csci567.easyrentals.SignUpNew">
+
 
     <TextView
-        android:id="@+id/signuppage"
+        android:id="@+id/signupnewpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signup"
@@ -21,7 +22,7 @@
         app:layout_constraintVertical_bias="0.067" />
 
     <EditText
-        android:id="@+id/firstname"
+        android:id="@+id/firstnamenew"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/fname"
@@ -33,7 +34,7 @@
         app:layout_constraintVertical_bias="0.26" />
 
     <EditText
-        android:id="@+id/lastname"
+        android:id="@+id/lastnamenew"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/lname"
@@ -43,10 +44,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.38" />
+
     <EditText
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/signup_email"
+        android:id="@+id/signupnew_email"
         android:hint="@string/email"
         android:inputType="textWebEmailAddress"
         app:layout_constraintRight_toRightOf="parent"
@@ -60,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:id="@+id/signup_password"
+        android:id="@+id/signupnew_password"
         android:hint="@string/passwd"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -73,7 +75,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:id="@+id/signup_contactNum"
+        android:id="@+id/signupnew_contactNum"
         android:hint="@string/contactNumber"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -111,7 +113,5 @@
         app:layout_constraintVertical_bias="0.98"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp" />
-
-
 
 </android.support.constraint.ConstraintLayout>

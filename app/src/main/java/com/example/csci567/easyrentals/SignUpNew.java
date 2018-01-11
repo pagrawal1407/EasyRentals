@@ -1,8 +1,8 @@
 package com.example.csci567.easyrentals;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +25,7 @@ import java.util.Map;
 
 import utility.UserPreferences;
 
-public class signup extends AppCompatActivity {
+public class SignUpNew extends AppCompatActivity {
 
     public TextView memberText;
     private UserPreferences userPreferences;
@@ -37,11 +37,11 @@ public class signup extends AppCompatActivity {
         final EditText fname,lname, email,passwd, contactNum;
         final Button signup;
 
-        fname = (EditText) findViewById(R.id.firstname);
-        lname = (EditText) findViewById(R.id.lastname);
-        email = (EditText) findViewById(R.id.signup_email);
-        passwd = (EditText) findViewById(R.id.signup_password);
-        contactNum = (EditText) findViewById(R.id.signup_contactNum);
+        fname = (EditText) findViewById(R.id.firstnamenew);
+        lname = (EditText) findViewById(R.id.lastnamenew);
+        email = (EditText) findViewById(R.id.signupnew_email);
+        passwd = (EditText) findViewById(R.id.signupnew_password);
+        contactNum = (EditText) findViewById(R.id.signupnew_contactNum);
 
         memberText = (TextView)findViewById(R.id.membertext);
 
@@ -67,7 +67,7 @@ public class signup extends AppCompatActivity {
                 String contactNumInput = contactNum.getText().toString();
 
                 if (ifNull(fnameInput, lnameInput, emailInput, passwdInput, contactNumInput)){
-                    Toast.makeText(signup.this, "Please enter all the details", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpNew.this, "Please enter all the details", Toast.LENGTH_LONG).show();
                 }
 
                /* if (fnameInput.equals("") && lnameInput.equals("") && emailInput.equals("") && passwdInput.equals(""))
@@ -87,7 +87,7 @@ public class signup extends AppCompatActivity {
                         volleyCall(fnameInput, lnameInput, emailInput, passwdInput, contactNumInput);
                     }
                     else
-                        Toast.makeText(signup.this, "Please enter a valid Email.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpNew.this, "Please enter a valid Email.", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -140,12 +140,12 @@ public class signup extends AppCompatActivity {
                                 userPreferences.saveFirstName(fnameInput);
                                 userPreferences.saveLastName(lnameInput);
 
-                                Intent intent = new Intent(getBaseContext(), FinalMessageActivity.class);
-                                Toast.makeText(signup.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getBaseContext(), CarDetails.class);
+                                Toast.makeText(SignUpNew.this,"Success, you are logged in", Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                             }
                             else
-                                Toast.makeText(signup.this,"Incorrect Username or Password", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpNew.this,"Incorrect Username or Password", Toast.LENGTH_LONG).show();
                         }
                     }
 

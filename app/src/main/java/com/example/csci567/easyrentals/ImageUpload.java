@@ -96,7 +96,7 @@ public class ImageUpload extends AppCompatActivity {
                 }
                 String content_type = getMimeType(imageName);
                 Log.i("ImageName", imageName);
-                Log.i("Content Type", content_type);
+               // Log.i("Content Type", content_type);
 
                 //Bitmap bmp = BitmapFactory.decodeFile(selectedPath);
                 int height = compressedImageFile.getHeight();
@@ -174,7 +174,7 @@ public class ImageUpload extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        ImageView imageView1, imageView2, imageView3, imageView4;
+        ImageView imageView1, imageView2, imageView3;
         imageView1 = (ImageView) findViewById(R.id.image_show1);
         imageView2 = (ImageView) findViewById(R.id.image_show2);
         imageView3 = (ImageView) findViewById(R.id.image_show3);

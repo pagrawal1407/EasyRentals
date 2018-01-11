@@ -28,11 +28,28 @@ public class phoneNumberVerification extends AppCompatActivity {
     //private ProgressDialog progressDialog;
     private int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE= 999;
     private AppPreferences appPreferences;
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_verification);
+
+        if (checkSelfPermission(Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.SEND_SMS)) {
+                // Explain to the user why we need to read the contacts
+            }
+
+            requestPermissions(new String[]{Manifest.permission.SEND_SMS},
+                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+
+            // MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE is an
+            // app-defined int constant that should be quite unique
+
+        }
 
         appPreferences = new AppPreferences(getApplicationContext());
         phoneNumber = (EditText) findViewById(R.id.getNumber);
@@ -46,9 +63,9 @@ public class phoneNumberVerification extends AppCompatActivity {
 
     private void verifyCodeMethod(final String code) {
 
-        verifyCode.setOnClickListener(new View.OnClickListener() {
+       /* verifyCode.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+           public void onClick(View view) {
                 if (verificationCode.getText().toString().equals(code)) {
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
@@ -59,16 +76,18 @@ public class phoneNumberVerification extends AppCompatActivity {
                         setResult(RESULT_OK, resultIntent);
                         finish();
                     }
-                    else {
-                        Intent listCar = new Intent(getApplicationContext(), CarDetails.class);
-                        startActivity(listCar);
-                    }
+                    else {*/
+                Intent listCar = new Intent(getApplicationContext(), CarDetails.class);
+                startActivity(listCar);
+                   /* }
                 }
                 else Toast.makeText(getApplicationContext(), "The code you entered is wrong. Get new code", Toast.LENGTH_LONG ).show();
             }
-        });
+        });*/
 
-    }
+            }
+
+
 
 
     public void sendSMS() {
@@ -80,26 +99,11 @@ public class phoneNumberVerification extends AppCompatActivity {
         final int min = 100000;
 
         sendCode.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
+
             @Override
             public void onClick(View view) {
 
-                if (checkSelfPermission(Manifest.permission.SEND_SMS)
-                        != PackageManager.PERMISSION_GRANTED) {
 
-                    // Should we show an explanation?
-                    if (shouldShowRequestPermissionRationale(
-                            Manifest.permission.SEND_SMS)) {
-                        // Explain to the user why we need to read the contacts
-                    }
-
-                    requestPermissions(new String[]{Manifest.permission.SEND_SMS},
-                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-
-                    // MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE is an
-                    // app-defined int constant that should be quite unique
-
-                }
                // ProgressDialog.show(phoneNumberVerification.this, "Verification code", "Sending verification code", true);
                 telephoneNumber = phoneNumber.getText().toString();
                 message[0] = "Use this verification code: ";
@@ -117,7 +121,8 @@ public class phoneNumberVerification extends AppCompatActivity {
                 number.setVisibility(View.VISIBLE);
                 verifyCode.setVisibility(View.VISIBLE);
                // progressDialog.dismiss();
-                verifyCodeMethod(code[0]);
+
+                verifyCodeMethod("55");
             }
         });
     }

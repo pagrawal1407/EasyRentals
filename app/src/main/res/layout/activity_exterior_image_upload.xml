@@ -134,16 +134,18 @@
             android:layout_alignParentEnd="true" />
 
         <Button
+            android:id="@+id/upload_button4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/uploadImage"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:textColor="#ffffff"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="26dp"
             android:background="#000"
-            android:id="@+id/upload_button4"
-            android:layout_below="@+id/image_display4"
-            android:onClick="uploadOptions"/>
+            android:onClick="uploadOptions"
+            android:text="@string/uploadImage"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 
 
         <Button
